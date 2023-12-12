@@ -49,3 +49,48 @@ The "pillars" of software architecture generally refer to the fundamental princi
 - **Performance:** Ensuring that the system performs its functions within acceptable parameters of speed, response time, and efficiency, meeting user needs.
 - **Standards and Design Patterns:** Utilizing best practices, recognized design patterns, and compliance with software engineering principles to ensure a solid and consistent structure.
 - **Ease of Maintenance:** Structuring the system in a way that makes it easy to identify, fix, or enhance specific parts of the software without affecting other areas.
+<br />
+
+## Resilience
+- It is a set of strategies adopted intentionally to adapt a system when a failure occurs.
+- Having resilience strategies allows us to minimize the risks of data loss and important transactions for the business.
+
+### Strategies
+
+#### Protect and be protected
+- A system in a distributed architecture needs to adopt self-preservation mechanisms to ensure maximum quality operation.
+- An accurate system cannot be selfish to the point of making more requests on a system that is failing.
+- A slow system on air is often worse than a system off air. (Domino effect).
+
+### Health check
+- Without vital signs, it is not possible to know the health of a system.
+- An unhealthy system has a chance of recovering if traffic stops being directed to it temporarily.
+- Quality health check.
+
+### Rate Limiting
+- Protects the system based on what it was designed to support.
+- Preference programmed by client type. (return 500 when the maximum number of requests is reached).
+
+### Circuit Breaker
+- Protects the system by causing requests made to it to be denied, Ex: 500.
+- Closed circuit = Requests arrive normally.
+- Open circuit = Requests do not reach the system. Instant error on the client.
+- Half open = Allows a limited number of requests to check whether the system is able to return to the air completely.
+
+### API Gateway
+- It is a centralizer of all system requests.
+- Ensures that "inappropriate" requests reach the system:
+Ex: unauthenticated user.
+- implements Rate Limiting, Health check, etc. policies.
+
+### Service Mesh
+- Controls network traffic.
+- Avoids protection implementations by the system itself.
+- mTLS (encryption).
+- Circuit breaker, retry, timeout, fault injection, etc.
+
+### Asynchronous communication
+- Prevents data loss.
+- There is no loss of data when sending a transaction if the server is down.
+- Server can process the transaction in your time when online.
+- Understand in depth the message broker / stream system.
